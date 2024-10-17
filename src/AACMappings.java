@@ -5,8 +5,11 @@
  * provides the methods for interacting with the categories
  * and updating the set of images that would be shown and handling
  * an interactions.
- * 
- * @author Catie Baker & YOUR NAME HERE
+ *
+ * @author Catie Baker
+ * @author Sara Jaljaa
+ *
+ * @course CSC-207-01
  *
  */
 public class AACMappings implements AACPage {
