@@ -15,9 +15,9 @@ import edu.grinnell.csc207.util.AssociativeArray;
  */
 public class AACCategory implements AACPage {
 
-	// ╭──────────────────────╮
-	// │        Fields        │
-	// ╰──────────────────────╯
+	// ╔════════════╗
+	// ║   Fields   ║
+	// ╚════════════╝
 
 	/**
 	 * A string to hold the category name.
@@ -29,9 +29,9 @@ public class AACCategory implements AACPage {
 	 */
 	AssociativeArray<String, String> items;
 
-	// ╭────────────────────────────╮
-	// │        Constructors        │
-	// ╰────────────────────────────╯
+	// ╔══════════════════╗
+	// ║   Constructors   ║
+	// ╚══════════════════╝
 	
 	/**
 	 * Creates a new empty category with the given name.
@@ -44,9 +44,9 @@ public class AACCategory implements AACPage {
 		this.items = new AssociativeArray<String, String>();
 	} // AACCategory(String)
 
-	// ╭───────────────────────╮
-	// │        Methods        │
-	// ╰───────────────────────╯
+	// ╔═════════════╗
+	// ║   Methods   ║
+	// ╚═════════════╝
 	
 	/**
 	 * Adds the image location, text pairing to the category.

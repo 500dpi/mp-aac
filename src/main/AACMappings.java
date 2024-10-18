@@ -1,3 +1,5 @@
+import java.util.NoSuchElementException;
+
 /**
  * Creates a set of mappings of an AAC that has two levels,
  * one for categories and then within each category, it has
@@ -14,6 +16,10 @@
  */
 public class AACMappings implements AACPage {
 	
+	// ╔══════════════════╗
+	// ║   Constructors   ║
+	// ╚══════════════════╝
+
 	/**
 	 * Creates a set of mappings for the AAC based on the provided
 	 * file. The file is read in to create categories and fill each
@@ -39,6 +45,10 @@ public class AACMappings implements AACPage {
 	public AACMappings(String filename) {
 		return; // STUB
 	} // AACMappings(String)
+
+	// ╔════════════════════╗
+	// ║   Public Methods   ║
+	// ╚════════════════════╝
 	
 	/**
 	 * Given the image location selected, it determines the action to be
