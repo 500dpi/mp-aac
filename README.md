@@ -3,7 +3,7 @@
 
 ### Overview
 A symbol-based AAC that returns the text-to-speech of version of the selected
-symbol to aid verbal commiunication.
+symbol to aid verbal communication.
 
 ### Author
 Sara Jaljaa
