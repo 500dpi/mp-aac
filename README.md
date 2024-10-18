@@ -4,8 +4,8 @@
 Sara Jaljaa
 
 ### Overview
-A symbol-based AAC that aids verbal communication by returning the text-to-speech of
-version of the selected symbol.
+A symbol-based AAC that aids verbal communication by returning the text-to-speech
+version of a selected symbol.
 
 ---
 
