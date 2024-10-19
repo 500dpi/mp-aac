@@ -149,6 +149,6 @@ public class AACMappings implements AACPage {
 	 * 		can be displayed, false otherwise.
 	 */
 	public boolean hasImage(String imageLoc) {
-		return false;
+		return false; // STUB
 	} // hasImage(String)
 } // AACMappings class

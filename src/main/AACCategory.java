@@ -22,12 +22,12 @@ public class AACCategory implements AACPage {
 	/**
 	 * A string to hold the category name.
 	 */
-	String category;
+	protected String category;
 
 	/**
 	 * An AssociativeArray to hold the image & text pair of a category.
 	 */
-	AssociativeArray<String, String> items;
+	protected AssociativeArray<String, String> items;
 
 	// ╔══════════════════╗
 	// ║   Constructors   ║
