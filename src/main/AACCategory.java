@@ -73,12 +73,12 @@ public class AACCategory implements AACPage {
 	 */
 	public String[] getImageLocs() {
 
-		// Create an array to hold all of the file location strings
+		// Create an array to hold all of the strings
 		String[] locations = new String[this.items.size()];
 
-		// Iterate and assign all image locations to the new array's indices
-		for (int i = 0; i < this.items.size(); i++) {
-			// FIX: implement me!
+		// Iterate and assign all image strings to the new array's indices
+		for (int i = 0; i < locations.length; i++) {
+			locations[i] = this.items.pairs[i].key;
 		} // for
 		return locations;
 	} // getImageLocs()

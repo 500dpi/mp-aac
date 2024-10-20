@@ -1,4 +1,6 @@
 import java.util.NoSuchElementException;
+import edu.grinnell.csc207.util.AssociativeArray;
+import edu.grinnell.csc207.util.NullKeyException;
 
 /**
  * Creates a set of mappings of an AAC that has two levels,
@@ -15,6 +17,25 @@ import java.util.NoSuchElementException;
  *
  */
 public class AACMappings implements AACPage {
+
+	// ╔════════════╗
+	// ║   Fields   ║
+	// ╚════════════╝
+
+	/**
+	 * Holds an AA of categories and what they contain.
+	 */
+	protected AssociativeArray<String, AACCategory> categories;
+
+	/**
+	 * Holds the the current category's objects.
+	 */
+	protected AACCategory categoryCurrent;
+
+	/**
+	 * Holds a category name.
+	 */
+	protected String categoryName;
 	
 	// ╔══════════════════╗
 	// ║   Constructors   ║
@@ -43,7 +64,9 @@ public class AACMappings implements AACPage {
 	 * 		The name of the file that stores the mapping information.
 	 */
 	public AACMappings(String filename) {
-		return; // STUB
+		this.categoryName = null;
+		this.categoryCurrent = null;
+		this.categories = new AssociativeArray<>();
 	} // AACMappings(String)
 
 	// ╔════════════════════╗
@@ -68,7 +91,12 @@ public class AACMappings implements AACPage {
 	 * 		If the image provided is not in the current category.
 	 */
 	public String select(String imageLoc) {
-		return null; // STUB
+		// if (this.categoryCurrent == null && this.categories.hasKey(imageLoc)) {
+		// 	try {
+		// 		this.categoryCurrent = this.categories.get(imageLoc);
+		// 	}
+		// }
+		return ""; // STUB
 	} // select(String)
 	
 	/**
@@ -79,7 +107,11 @@ public class AACMappings implements AACPage {
 	 * 		it should return an empty array.
 	 */
 	public String[] getImageLocs() {
-		return null; // STUB
+		if (categoryCurrent != null) {
+			return categoryCurrent.getImageLocs();
+		} else {
+			return new String[0];
+		} // if
 	} // getImageLocs()
 	
 	/**
@@ -87,7 +119,7 @@ public class AACMappings implements AACPage {
 	 * category.
 	 */
 	public void reset() {
-		return; // STUB
+		this.categoryCurrent = null;
 	} // reset()
 	
 	/**
@@ -124,7 +156,15 @@ public class AACMappings implements AACPage {
 	 * 		The text associated with the image.
 	 */
 	public void addItem(String imageLoc, String text) {
-		return; // STUB
+		if (this.categoryCurrent != null) {
+			categoryCurrent.addItem(imageLoc, text);
+		} else {
+			try {
+				this.categories.set(imageLoc, new AACCategory(text));
+			} catch (NullKeyException e) {
+				System.err.println("Error: Cannot add null item.");;
+			} // try
+		} // if
 	} // addItem(String, String)
 	
 	/**
@@ -135,7 +175,7 @@ public class AACMappings implements AACPage {
 	 * 		on the default category.
 	 */
 	public String getCategory() {
-		return null; // STUB
+		return this.categoryName;
 	} // getCategory()
 	
 	/**
@@ -149,6 +189,6 @@ public class AACMappings implements AACPage {
 	 * 		can be displayed, false otherwise.
 	 */
 	public boolean hasImage(String imageLoc) {
-		return false; // STUB
+		return this.categories.hasKey(imageLoc);
 	} // hasImage(String)
 } // AACMappings class
