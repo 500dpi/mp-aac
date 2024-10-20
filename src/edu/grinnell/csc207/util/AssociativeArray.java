@@ -36,7 +36,7 @@ public class AssociativeArray<K, V> {
   /**
    * The array of key/value pairs.
    */
-  KVPair<K, V>[] pairs;
+  public KVPair<K, V>[] pairs;
 
   // +--------------+------------------------------------------------
   // | Constructors |
