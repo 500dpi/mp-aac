@@ -44,7 +44,7 @@ public class AACCategory implements AACPage {
 	} // AACCategory(String)
 
 	// ╔═════════════╗
-	// ║   Methods   ║ // Split Categories
+	// ║   Methods   ║
 	// ╚═════════════╝
 	
 	/**
