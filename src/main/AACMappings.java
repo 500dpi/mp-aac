@@ -33,7 +33,7 @@ public class AACMappings implements AACPage {
 	protected AACCategory categoryCurrent;
 
 	/**
-	 * Holds a category name.
+	 * Holds the current category name.
 	 */
 	protected String categoryName;
 	
