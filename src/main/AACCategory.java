@@ -1,5 +1,4 @@
 import java.util.NoSuchElementException;
-import edu.grinnell.csc207.util.KeyNotFoundException;
 import edu.grinnell.csc207.util.NullKeyException;
 import edu.grinnell.csc207.util.AssociativeArray;
 
@@ -45,7 +44,7 @@ public class AACCategory implements AACPage {
 	} // AACCategory(String)
 
 	// ╔═════════════╗
-	// ║   Methods   ║
+	// ║   Methods   ║ // Split Categories
 	// ╚═════════════╝
 	
 	/**
@@ -60,7 +59,7 @@ public class AACCategory implements AACPage {
 		try {
 			this.items.set(imageLoc, text);
 		} catch (NullKeyException e) {
-			return;
+			System.err.println("Error: Cannot set an image to null location.");
 		} // try/catch
 	} // addItem(String, String)
 
@@ -72,7 +71,6 @@ public class AACCategory implements AACPage {
 	 *		it should return an empty array.
 	 */
 	public String[] getImageLocs() {
-
 		// Create an array to hold all of the strings
 		String[] locations = new String[this.items.size()];
 
@@ -82,6 +80,24 @@ public class AACCategory implements AACPage {
 		} // for
 		return locations;
 	} // getImageLocs()
+
+	/**
+	 * Returns the text associated with the given image in this category.
+	 *
+	 * @param imageLoc
+	 * 		The location of the image.
+	 * @return
+	 * 		The text associated with the image.
+	 * @throws NoSuchElementException
+	 *		If the image provided is not in the current category.
+	 */
+	public String select(String imageLoc) throws NoSuchElementException {
+		try {
+			return this.items.get(imageLoc);
+		} catch (Exception e) {
+			throw new NoSuchElementException("Error: Image does not exist in category.");
+		} // try/catch
+	} // select(String)
 
 	/**
 	 * Returns the name of the category.
@@ -94,22 +110,14 @@ public class AACCategory implements AACPage {
 	} // getCategory()
 
 	/**
-	 * Returns the text associated with the given image in this category.
+	 * Returns the length of the array of pairs.
 	 *
-	 * @param imageLoc
-	 * 		The location of the image.
 	 * @return
-	 * 		The text associated with the image.
-	 * @throws NoSuchElementException
-	 *		If the image provided is not in the current category.
+	 * 		The size of the array.
 	 */
-	public String select(String imageLoc) {
-		try {
-			return this.items.get(imageLoc);
-		} catch (KeyNotFoundException e) {
-			throw new NoSuchElementException("Error: Image does not exist in category.");
-		} // try/catch
-	} // select(String)
+	public int size() {
+		return this.items.size();
+	} // size()
 
 	/**
 	 * Determines if the provided image is stored in the category.

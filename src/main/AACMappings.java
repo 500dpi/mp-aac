@@ -1,6 +1,8 @@
 import java.util.NoSuchElementException;
 import edu.grinnell.csc207.util.AssociativeArray;
+import edu.grinnell.csc207.util.KeyNotFoundException;
 import edu.grinnell.csc207.util.NullKeyException;
+// import java.io.*;
 
 /**
  * Creates a set of mappings of an AAC that has two levels,
@@ -23,19 +25,14 @@ public class AACMappings implements AACPage {
 	// ╚════════════╝
 
 	/**
-	 * Holds an AA of categories and what they contain.
+	 * Holds an AA of categories that is used to map categories to filenames.
 	 */
 	protected AssociativeArray<String, AACCategory> categories;
 
 	/**
 	 * Holds the the current category's objects.
 	 */
-	protected AACCategory categoryCurrent;
-
-	/**
-	 * Holds the current category name.
-	 */
-	protected String categoryName;
+	protected AACCategory current;
 	
 	// ╔══════════════════╗
 	// ║   Constructors   ║
@@ -64,9 +61,17 @@ public class AACMappings implements AACPage {
 	 * 		The name of the file that stores the mapping information.
 	 */
 	public AACMappings(String filename) {
-		this.categoryName = null;
-		this.categoryCurrent = null;
+		this.current = new AACCategory(null);
 		this.categories = new AssociativeArray<>();
+		// String input = null;
+
+		// try {
+		// 	while (writer.readLine() != null) {
+		// 		String[] args = input.split(" ");
+		// 	}
+		// } catch (Exception e) {
+		// 	;
+		// }
 	} // AACMappings(String)
 
 	// ╔════════════════════╗
@@ -90,13 +95,17 @@ public class AACMappings implements AACPage {
 	 * @throws NoSuchElementException
 	 * 		If the image provided is not in the current category.
 	 */
-	public String select(String imageLoc) {
-		// if (this.categoryCurrent == null && this.categories.hasKey(imageLoc)) {
-		// 	try {
-		// 		this.categoryCurrent = this.categories.get(imageLoc);
-		// 	}
-		// }
-		return ""; // STUB
+	public String select(String imageLoc) throws NoSuchElementException {
+		if (!this.categories.hasKey(imageLoc)) {
+			return this.current.select(imageLoc);
+		} else {
+			try {
+				this.current = this.categories.get(imageLoc);
+			} catch (KeyNotFoundException e) {
+				System.err.println("Error: image does not exist in category.");
+			} // try
+			return "";
+		} // if
 	} // select(String)
 	
 	/**
@@ -107,8 +116,8 @@ public class AACMappings implements AACPage {
 	 * 		it should return an empty array.
 	 */
 	public String[] getImageLocs() {
-		if (categoryCurrent != null) {
-			return categoryCurrent.getImageLocs();
+		if (this.current != null) {
+			return this.current.getImageLocs();
 		} else {
 			return new String[0];
 		} // if
@@ -119,7 +128,7 @@ public class AACMappings implements AACPage {
 	 * category.
 	 */
 	public void reset() {
-		this.categoryCurrent = null;
+		this.current = null;
 	} // reset()
 	
 	/**
@@ -143,7 +152,24 @@ public class AACMappings implements AACPage {
 	 * 		The name of the file to write the AAC mapping to.
 	 */
 	public void writeToFile(String filename) {
-		return; // STUB
+		// FileWriter writer = new FileWriter(filename);
+		// String[] names = new String[this.categories.size()], images;
+		// AACCategory category;
+		
+		// try {
+		// 	if (this.categories != null) {
+		// 		for (int i = 0; i < categories.size(); i++) {
+		// 			category = this.categories.pairs[i].val;
+
+		// 			writer.write(this.categories.pairs[i].key + " "
+		// 					+ category.getCategory() + "\n");
+		// 		} // for
+		// 	} else {
+		// 		;
+		// 	}
+		// } catch (IOException e) {
+		// 	;
+		// }
 	} // writeToFile(String)
 	
 	/**
@@ -156,8 +182,8 @@ public class AACMappings implements AACPage {
 	 * 		The text associated with the image.
 	 */
 	public void addItem(String imageLoc, String text) {
-		if (this.categoryCurrent != null) {
-			categoryCurrent.addItem(imageLoc, text);
+		if (this.current != null) {
+			current.addItem(imageLoc, text);
 		} else {
 			try {
 				this.categories.set(imageLoc, new AACCategory(text));
@@ -175,7 +201,7 @@ public class AACMappings implements AACPage {
 	 * 		on the default category.
 	 */
 	public String getCategory() {
-		return this.categoryName;
+		return this.current.getCategory();
 	} // getCategory()
 	
 	/**
