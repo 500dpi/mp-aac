@@ -1,5 +1,7 @@
 ## *CSC-207-01*, Mini-Project #5: Augmentative and Alternative Communication (AAC) Devices
 
+*incomplete*
+
 ### Author
 Sara Jaljaa
 
