@@ -22,7 +22,7 @@ public class KVPair<K, V> {
   /**
    * The value.
    */
-  V val;
+  public V val;
 
   // +--------------+------------------------------------------------
   // | Constructors |
