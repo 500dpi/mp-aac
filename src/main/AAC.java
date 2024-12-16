@@ -28,7 +28,6 @@ import javax.speech.synthesis.SynthesizerModeDesc;
  * device of the AAC.
  *
  * @author Catie Baker
- *
  */
 public class AAC implements ActionListener {
 
@@ -43,10 +42,11 @@ public class AAC implements ActionListener {
 	private Scanner input;
 
 	/**
-	 * Creates the AAC display for the file provided
+	 * Creates the AAC display for the file provided.
 	 *
-	 * @param filename the name of the file that contains the images and text that
-	 *                 will be in the AAC
+	 * @param filename
+	 * 		The name of the file that contains the images and text that
+	 * 		will be in the AAC.
 	 */
 	public AAC(String filename) {
 		// this.page = new AACCategory("test");
@@ -61,13 +61,15 @@ public class AAC implements ActionListener {
 		frame.pack();
 		frame.setVisible(true);
 		input = new Scanner(System.in);
-	}
+	} // AAC(String)
 
 	/**
-	 * Loads the images in the screen in a width by length grid
+	 * Loads the images in the screen in a width by length grid.
 	 *
-	 * @param width  the number of images across to display
-	 * @param length the number of images down to display
+	 * @param width
+	 * 		The number of images across to display.
+	 * @param length
+	 * 		The number of images down to display.
 	 */
 	public void loadImages(int width, int length) {
 		Container pane = frame.getContentPane();
@@ -80,7 +82,7 @@ public class AAC implements ActionListener {
 		String category = "Home Page";
 		if (!this.page.getCategory().equals("")) {
 			category = this.page.getCategory();
-		}
+		} // if
 		c.gridx = 0;
 		c.gridy = 0;
 		JLabel cat = new JLabel(category);
@@ -97,7 +99,7 @@ public class AAC implements ActionListener {
 			save.setActionCommand("save");
 			save.addActionListener(this);
 			panel1.add(save);
-		}
+		} // if
 		JButton add = new JButton(new ImageIcon("img/plus.png"));
 		add.setActionCommand("add");
 		add.addActionListener(this);
@@ -113,7 +115,7 @@ public class AAC implements ActionListener {
 			backArrow.setActionCommand("back");
 			backArrow.addActionListener(this);
 			pane.add(backArrow, BorderLayout.LINE_START);
-		}
+		} // if
 
 		// add images
 		JPanel panel = new JPanel();
@@ -128,9 +130,9 @@ public class AAC implements ActionListener {
 					button.addActionListener(this);
 					panel.add(button);
 					currImage++;
-				}
-			}
-		}
+				} // elif
+			} // for (x)
+		} // for (y)
 		pane.add(panel, BorderLayout.CENTER);
 
 		// if have later pages, add next button
@@ -139,22 +141,24 @@ public class AAC implements ActionListener {
 			nextArrow.setActionCommand("next");
 			nextArrow.addActionListener(this);
 			pane.add(nextArrow, BorderLayout.LINE_END);
-		}
+		} // if
 
 		JLabel ack = new JLabel("All provided icons are from icons8: icons8.com");
 		pane.add(ack, BorderLayout.PAGE_END);
 		pane.revalidate();
 		pane.requestFocusInWindow();
-	}
+	} // loadImages(int, int)
 
 	public static void main(String[] args) {
-
 		try {
 			// Set property as Kevin Dictionary
-			System.setProperty("freetts.voices", "com.sun.speech.freetts.en.us" + ".cmu_us_kal.KevinVoiceDirectory");
+			System.setProperty(
+					"freetts.voices",
+					"com.sun.speech.freetts.en.us" + ".cmu_us_kal.KevinVoiceDirectory");
 
 			// Register Engine
-			Central.registerEngineCentral("com.sun.speech.freetts" + ".jsapi.FreeTTSEngineCentral");
+			Central.registerEngineCentral(
+					"com.sun.speech.freetts" + ".jsapi.FreeTTSEngineCentral");
 			synthesizer = Central.createSynthesizer(new SynthesizerModeDesc(Locale.US));
 
 			// Allocate synthesizer
@@ -165,14 +169,14 @@ public class AAC implements ActionListener {
 
 		} catch (Exception e) {
 			e.printStackTrace();
-		}
+		} // try/catch
 		AAC aac = new AAC("AACMappings.txt");
-	}
+	} // main(String[])
 
 	/**
 	 * Responds to the click of a button. If the button is a category or action
 	 * (e.g. home, next), it updates the screen. If the button is an image within
-	 * the category, it speaks aloud the text
+	 * the category, it speaks aloud the text.
 	 */
 	public void actionPerformed(ActionEvent e) {
 		String actionCommand = e.getActionCommand();
@@ -197,8 +201,8 @@ public class AAC implements ActionListener {
 						JOptionPane.PLAIN_MESSAGE, null, null, "");
 				if (result != null && result.length() > 0) {
 					this.page.addItem(imageLoc, result);
-				}
-			}
+				} // if
+			} // if
 			this.images = this.page.getImageLocs();
 			this.startIndex = 0;
 			this.endIndex = Math.min(NUM_ACROSS * NUM_DOWN, this.images.length);
@@ -220,9 +224,9 @@ public class AAC implements ActionListener {
 					synthesizer.waitEngineState(Synthesizer.QUEUE_EMPTY);
 				} catch (Exception e1) {
 					e1.printStackTrace();
-				}
-			}
-		}
+				} // try/catch
+			} // elif
+		} // elif
 		loadImages(NUM_ACROSS, NUM_DOWN);
-	}
-}
+	} // actionPerformed(ActionListener)
+} // class AAC

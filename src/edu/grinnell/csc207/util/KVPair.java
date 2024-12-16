@@ -4,12 +4,15 @@ package edu.grinnell.csc207.util;
  * An easy way to store key/value pairs.  We assume that other
  * classes will access fields directly.
  *
+ * @author Samuel A. Rebelsky
+ *
  * @param <K>
  *   The type of the keys.
  * @param <V>
  *   The type of the values.
  */
 public class KVPair<K, V> {
+
   // +--------+------------------------------------------------------
   // | Fields |
   // +--------+
@@ -71,8 +74,7 @@ public class KVPair<K, V> {
       return this.key.toString() + ":" + "<null>";
     } else {
       return this.key.toString() + ":" + this.val.toString();
-    } // if
+    } // elif
   } // toString()
-
 } // class KVPair
 
